@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Odcheck() {
+function OdCheck() {
   return (
     <div>
         hi
@@ -8,4 +8,4 @@ function Odcheck() {
   )
 }
 
-export default Odcheck
+export default OdCheck
