@@ -1,4 +1,8 @@
-export default function OdWarningModal({ onClose }) {
+interface OdWarningModalProps {
+  onClose: () => void;
+}
+
+export default function OdWarningModal({ onClose }: OdWarningModalProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg">
@@ -11,6 +15,5 @@ export default function OdWarningModal({ onClose }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
