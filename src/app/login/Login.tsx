@@ -10,7 +10,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     setLoading(true);
-
+  
     try {
       const response = await fetch("/api/login", {
         method: "POST",
@@ -19,20 +19,21 @@ const Login: React.FC = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-
+  
       const data = await response.json();
       if (data.message === "Verified") {
+        document.cookie = "isAuthenticated=true; path=/"; // Set authentication cookie
         setIsVerified(true);
       } else {
         alert("Not Verified");
       }
     } catch (error) {
       alert("Error logging in");
-    }finally {
-        setLoading(false);
-      }
+    } finally {
+      setLoading(false);
+    }
   };
-
+  
   if (isVerified) {
     return <Appmain username={username} ></Appmain>
   }
