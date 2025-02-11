@@ -42,8 +42,7 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">OD Management System</h1>
+    <div className="container mx-auto p-4 bg-purple-950">
       <OdStatusCheck onCheck={handleOdCheck} />
       <OdCountTable />
       {showAllotmentModal && currentStudent && (
