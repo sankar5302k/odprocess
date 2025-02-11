@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { name, id, odCount, username } = req.body;
 
-  if (!name || !id || !odCount || !username) {
+  if (!name || !id  || !username) {
     return res.status(400).json({ message: "Missing required fields" });
   }
 

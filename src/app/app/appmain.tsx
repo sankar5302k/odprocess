@@ -11,13 +11,17 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
   const [studentId, setStudentId] = useState<string>("");
   const [odCount, setOdCount] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
+  const [isAddingStudent, setIsAddingStudent] = useState(false); // Loading state for adding student
+  const [isCheckingOD, setIsCheckingOD] = useState(false); // Loading state for checking OD
   const router = useRouter();
 
   const handleSingleSubmit = async () => {
-    if (!studentName || !studentId || !odCount) {
+    if (!studentName || !studentId ) {
       alert("Please fill all fields!");
       return;
     }
+
+    setIsAddingStudent(true); // Start loading
 
     try {
       const response = await fetch("/api/add-student", {
@@ -48,6 +52,8 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to add student!");
+    } finally {
+      setIsAddingStudent(false); // Stop loading
     }
   };
 
@@ -57,6 +63,11 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
     setStudentId("");
     setOdCount("");
     setFile(null);
+  };
+
+  const handleCheckOD = () => {
+    setIsCheckingOD(true); // Start loading
+    router.push("/odch"); // Navigate to OD Check page
   };
 
   return (
@@ -108,12 +119,19 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
                       OD Check
                     </h3>
                     <button
-                      onClick={() => router.push("/odch")} // Show OD Check Component
+                      onClick={handleCheckOD}
+                      disabled={isCheckingOD} // Disable button while loading
                       className="w-full px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg sm:rounded-xl font-medium transform hover:translate-y-[-2px] hover:shadow-lg active:translate-y-[0px] transition-all duration-300"
                     >
                       <div className="flex items-center justify-center gap-2">
-                        <span className="material-symbols-outlined">check_circle</span>
-                        <span className="text-sm sm:text-base">Check OD Status</span>
+                        {isCheckingOD ? (
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        ) : (
+                          <>
+                            <span className="material-symbols-outlined">check_circle</span>
+                            <span className="text-sm sm:text-base">Check OD Status</span>
+                          </>
+                        )}
                       </div>
                     </button>
                   </div>
@@ -158,9 +176,17 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
               />
               <button 
                 onClick={handleSingleSubmit} 
+                disabled={isAddingStudent} // Disable button while loading
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg w-full"
               >
-                Submit
+                {isAddingStudent ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Submitting...</span>
+                  </div>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </div>
           </div>
