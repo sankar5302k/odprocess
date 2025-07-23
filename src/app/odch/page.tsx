@@ -5,11 +5,13 @@ import OdStatusCheck from "./components/OdStatusCheck"
 import OdAllotmentModal from "./components/OdAllotmentModel"
 import OdWarningModal from "./components/OdWarningModal"
 import OdCountTable from "./components/OdCountTable"
+import LogsTable from "./components/logs-table"
 
 interface Student {
   sitId: string
   studentName: string // ✅ Add this field
   initialOd: number
+  id: number
 }
 
 export default function Home() {
@@ -53,6 +55,8 @@ export default function Home() {
         />
       )}
       {showWarningModal && <OdWarningModal onClose={() => setShowWarningModal(false)} />}
+
+    
     </div>
   )
 }

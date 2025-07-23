@@ -8,15 +8,25 @@ datasource db {
 }
 
 model User {
-  hodName   String  @unique @default("default_hod")
-  password  String  @default("default_password")
-  createdAt DateTime @default(now())
+  hodName   String    @unique @default("default_hod")
+  password  String    @default("default_password")
+  createdAt DateTime  @default(now())
 }
 
 model Students {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   studentName String
-  sitId       String  @unique
-  initialOd   Int     @default(0)
+  sitId       String    @unique
+  initialOd   Int       @default(0)
   hodName     String
+  logs        Logs[]    @relation("StudentLogs")
+}
+
+model Logs {
+  id          Int       @id @default(autoincrement())
+  studentId   Int
+  student     Students  @relation("StudentLogs", fields: [studentId], references: [id])
+  allotted    Boolean
+  reason      String?
+  createdAt   DateTime  @default(now())
 }

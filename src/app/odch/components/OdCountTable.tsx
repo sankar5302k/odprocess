@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle } from "
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import LogsTable from "./logs-table"
 
 interface OdCount {
   odCount: number
@@ -104,7 +105,9 @@ export default function OdCountTable() {
           Refresh
         </Button>
       </div>
-
+      <br>
+      </br>
+<LogsTable></LogsTable>
       {/* ✅ Responsive Dialog */}
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="bg-purple-900 text-white max-w-lg sm:max-w-3xl max-h-[80vh] sm:max-h-[70vh] overflow-hidden">
