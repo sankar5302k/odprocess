@@ -82,7 +82,7 @@ const Appmain: React.FC<{ username: string }> = ({ username }) => {
                     person
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-center sm:text-left bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-                    HOD: {username}
+                    User : {username}
                   </h2>
                 </div>
               </div>
